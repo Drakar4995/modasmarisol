@@ -1,9 +1,9 @@
-<?php
+ <?php
 session_start();
 require_once 'Database.php';
 if (!isset($_SESSION['username'])) {
 
-    if (isset($_POST['username']) && isset($_POST['password']) && (!is_null($_POST['username']) || !is_null($_POST['password']))) {
+    if (isset($_POST['username']) && isset($_POST['password']) && (!empty($_POST['username']) || !empty($_POST['password']))) {
 
         $username = $_POST['username'];
         $pass = $_POST['password'];
@@ -18,17 +18,18 @@ if (!isset($_SESSION['username'])) {
             var_dump($resultado);
             $_SESSION['username'] = $username;
             $_SESSION['carrito'] = array();
+            
             header("location: ./prendas.php");
             exit();
         } else {
             $errorLogin = 'USUARIO NO ENCONTRADO';
         }
+    }else{
+            $errorLogin ="Rellena todos los campos";
     }
 } else {
     if (isset($_POST['logout'])) {
         session_start();
-        //unset($_SESSION['user']);unset($_SESSION['carrito']);
-        //unset($_SESSION["id"]);
         unset($_SESSION["username"]);
         unset($_SESSION['carrito']);
         header("Location:index.php");
