@@ -1,190 +1,197 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 0;
-    margin: 0;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
 }
-form{
-    background-color: #eee;
-    margin: 0 auto;
-    width: 400px;
-    padding: 20px;
-}
-
-input{
-    border: solid 0;
-    border-radius: 3px;
+form {
+  background-color: #eee;
+  margin: 0 auto;
+  width: 400px;
+  padding: 20px;
 }
 
-input[type=text], input[type=password]{
-    padding: 10px;
-    font-size: 18px;
-    outline: none;
-    width: 370px;
-}
-input[type=submit]{
-    background-color: #1E69E3;
-    color: white;
-    padding: 8px;
-    border: none;
-    width: 200px;
-}
-.center{
-    text-align: center;
+input {
+  border: solid 0;
+  border-radius: 3px;
 }
 
-.opcion{
-    padding: 5px 0;
+input[type="text"],
+input[type="password"] {
+  padding: 10px;
+  font-size: 18px;
+  outline: none;
+  width: 370px;
+}
+input[type="submit"] {
+  background-color: #1e69e3;
+  color: white;
+  padding: 8px;
+  border: none;
+  width: 200px;
+}
+.center {
+  text-align: center;
 }
 
-.barra{
-    background-color:rgb(152, 196, 236);
-    border-radius: 4px;
-    padding: 10px;
+.opcion {
+  padding: 5px 0;
 }
 
-.seleccionado{
-    background-color: rgb(33, 90, 143);
-    border-radius: 4px;
-    color: white;
-    padding: 10px;
+.barra {
+  background-color: rgb(152, 196, 236);
+  border-radius: 4px;
+  padding: 10px;
 }
 
-#menu{
-    background-color: #eee;
-    padding: 10px;
-}
-#menu ul{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: inline-block;
-    width: 100%;
-}
-#menu ul li{
-    display: inline;
-}
-#menu ul li a{
-    color: #1E69E3;
-    text-decoration: none;
-}
-#menu ul li a:hover{
-    color: rgb(227, 109, 30);
-    text-decoration: none;
-}
-.cerrar-sesion{
-    float: right;
+.seleccionado {
+  background-color: rgb(33, 90, 143);
+  border-radius: 4px;
+  color: white;
+  padding: 10px;
 }
 
-.registrarse{
-    background-color: #1E69E3;
-    color: white;
-    padding: 8px;
-    border: none;
-    width: 200px;
+#menu {
+  background-color: #eee;
+  padding: 10px;
+}
+#menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline-block;
+  width: 100%;
+}
+#menu ul li {
+  display: inline;
+}
+#menu ul li a {
+  color: #1e69e3;
+  text-decoration: none;
+}
+#menu ul li a:hover {
+  color: rgb(227, 109, 30);
+  text-decoration: none;
+}
+.cerrar-sesion {
+  float: right;
 }
 
-
-nav{
-    background: black;
-}
-nav ul{
-    padding: 0;
-    margin: 0;
-}
-
-nav ul li{
-    display: inline-block;
-    padding: 10px;
+.registrarse {
+  background-color: #1e69e3;
+  color: white;
+  padding: 8px;
+  border: none;
+  width: 200px;
 }
 
-nav ul li a{
-    display: inline;
-    color: white;
-    padding: 10px;
-    text-decoration: none;
+nav {
+  background: black;
 }
-.carrito{
-    float: right;
+nav ul {
+  padding: 0;
+  margin: 0;
 }
 
-.carrito-active{
-    background: white;
-}
-.carrito-active a{
-    color: black;
+nav ul li {
+  display: inline-block;
+  padding: 10px;
 }
 
-main{
-    margin: 0 auto;
-    width: 600px;
+nav ul li a {
+  display: inline;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+}
+.carrito {
+  float: right;
 }
 
-.articulo{
-    display: inline-block;
-    padding: 10px;
-    vertical-align: top;
-    text-align: center;
-    width: 176px;
+.carrito-active {
+  background: white;
 }
-.articulo div{
-    padding: 5px 0;
-}
-.articulo .imagen img{
-    height: 200px;
+.carrito-active a {
+  color: black;
 }
 
-.articulo .titulo{
-    font-weight: bold;
-    font-size: 18px;
-}
-button{
-    border: 0;
-    border-radius: 5px;
-    background: rgb(255, 157, 10);
-    cursor: pointer;
-    padding: 10px;
+main {
+  margin: 0 auto;
+  width: 600px;
 }
 
-#carrito-container{
-    width: 400px;
-    background: white;
-    border: solid 1px #000;
-    padding: 10px;
-    box-sizing: border-box;
-    position: absolute;
-    right: 0;
-    margin-top: 10px;
-    display: none;
+.articulo {
+  width: 33.33%;
+  padding: 5px;
+  display: inline-block;
+  padding: 10px;
+  vertical-align: top;
+  text-align: center;
+  width: 176px;
+}
+.row{
+    content: "";
+  clear: both;
+  display: table;
+}
+.articulo div {
+  padding: 5px 0;
+}
+.articulo .imagen img {
+  height: 200px;
 }
 
-#tabla .fila{
-    box-sizing: border-box;
-    padding: 10px 0;
+.articulo .titulo {
+  font-weight: bold;
+  font-size: 18px;
+}
+button {
+  border: 0;
+  border-radius: 5px;
+  background: rgb(255, 157, 10);
+  cursor: pointer;
+  padding: 10px;
 }
 
-#tabla .fila .imagen{
-    display: inline-block;
-    width: 100px;
-}
-#tabla .fila .info{
-    box-sizing: border-box;
-    font-size: 14px;
-    display: inline-block;
-    padding-left: 20px;
-    vertical-align: top;
-    width: 273px;
-}
-
-#tabla .fila .info .nombre{
-    font-size: 20px;
-    font-weight: bold;
-}
-#tabla .fila .info .botones{
-    padding: 20px 0 0 0;
+#carrito-container {
+  width: 400px;
+  background: white;
+  border: solid 1px #000;
+  padding: 10px;
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  margin-top: 10px;
+  display: none;
 }
 
-#tabla p{
-    font-size: 24px !important;
-    text-align: center;
-    font-weight: bold;
+#tabla .fila {
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+#tabla .fila .imagen {
+  display: inline-block;
+  width: 100px;
+}
+#tabla .fila .info {
+  box-sizing: border-box;
+  font-size: 14px;
+  display: inline-block;
+  padding-left: 20px;
+  vertical-align: top;
+  width: 273px;
+}
+
+#tabla .fila .info .nombre {
+  font-size: 20px;
+  font-weight: bold;
+}
+#tabla .fila .info .botones {
+  padding: 20px 0 0 0;
+}
+
+#tabla p {
+  font-size: 24px !important;
+  text-align: center;
+  font-weight: bold;
 }
