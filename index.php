@@ -3,31 +3,34 @@
     require_once 'Database.php';
     if (!isset($_SESSION['username'])) {
 
-        if (isset($_POST['username']) && isset($_POST['password']) && (!empty($_POST['username']) || !empty($_POST['password']))) {
+        if (isset($_POST['username']) && isset($_POST['password'])) { {
+                if ((!empty($_POST['username']) || !empty($_POST['password']))) {
+                    $username = $_POST['username'];
+                    $pass = $_POST['password'];
+                    $pass = md5($pass);
+                    //"SELECT * FROM users WHERE user_name = '$uname' AND password='$pass' ";
+                    //SELECT * FROM `usuarios` WHERE username = "user" AND password = "81dc9bdb52d04dc20036dbd8313ed055";
+                    $sql = "SELECT * from usuarios WHERE username = '$username' AND password = '$pass'";
 
-            $username = $_POST['username'];
-            $pass = $_POST['password'];
-            $pass = md5($pass);
-            //"SELECT * FROM users WHERE user_name = '$uname' AND password='$pass' ";
-            //SELECT * FROM `usuarios` WHERE username = "user" AND password = "81dc9bdb52d04dc20036dbd8313ed055";
-            $sql = "SELECT * from usuarios WHERE username = '$username' AND password = '$pass'";
+                    $resultado = $conexion->query($sql);
 
-            $resultado = $conexion->query($sql);
+                    if ($resultado->num_rows > 0) {
+                        $user = mysqli_fetch_assoc($resultado);
+                        $_SESSION['username'] = $user['username'];
+                        $_SESSION['id'] = $user['id'];
+                        $_SESSION['carrito'] = array();
 
-            if ($resultado->num_rows > 0) {
-                var_dump($resultado);
-                $_SESSION['username'] = $username;
-                $_SESSION['carrito'] = array();
-
-                header("location: ./prendas.php");
-                exit();
-            } else {
-                $errorLogin = 'USUARIO NO ENCONTRADO';
+                        header("location: ./prendas.php");
+                        exit();
+                    } else {
+                        $errorLogin = 'Este usuario no existe';
+                    }
+                } else {
+                    $errorLogin = "Rellena todos los campos";
+                }
             }
-        } else {
-            $errorLogin = "Rellena todos los campos";
-        }
-    } else {
+        } 
+    }else {
         if (isset($_GET['logout'])) {
             session_start();
             unset($_SESSION["username"]);
@@ -47,10 +50,10 @@
  <head>
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
-     <title>Bootstrap demo</title>
+     <title>Login</title>
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
      <script>
- 
+
      </script>
  </head>
 
@@ -62,8 +65,8 @@
                      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                          <div class="card shadow-2-strong" style="border-radius: 1rem;">
                              <div class="card-body p-5 text-center">
-
-                                 <h3 class="mb-5">Inicia Sesion</h3>
+                                 <?php if (isset($errorLogin)) echo '<div class="alert alert-danger" role="alert">' . $errorLogin . '</div>'; ?>
+                                 <h3 class="mb-4">Inicia Sesion</h3>
 
                                  <div class="form-outline mb-4">
                                      <input type="text" name="username" class="form-control form-control-lg" />

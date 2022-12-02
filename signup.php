@@ -1,8 +1,7 @@
 <?php
 require_once 'Database.php';
 session_start();
-if(isset($_SESSION['username']))
-{
+if (isset($_SESSION['username'])) {
     header("location: ./index.php");
     exit();
 }
@@ -83,7 +82,7 @@ function FindUserEmail($email, $conexion)
     }
 }
 function FindUserUsername($username, $conexion)
-{   
+{
     $sql = "SELECT * from usuarios WHERE username='$username'";
 
     $resultado = $conexion->query($sql);
@@ -95,91 +94,70 @@ function FindUserUsername($username, $conexion)
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script>
+
+    </script>
 </head>
 
 <body>
-    <h1>Modas Marisol</h1>
-    <h2>Registro</h2>
-
-    <?php if (isset($errorRegistrarse)) echo '<h2 style="color:red">' . $errorRegistrarse . '</h2>'; ?>
     <form method="POST">
-        <label>Usuario</label> <br>
-        <input type="hidden" name="registrarse">
+        <section class="vh-100" style="background-color: #508bfc;">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                            <div class="card-body p-5 text-center">
 
-        <input type="text" name="username"><br>
-        <label for="">Email</label><br>
-        <input type="text" name="email"><br>
-        <label for="">Contraseña</label><br>
-        <input type="password" name="password"><br>
-        <label for="">Repita la Contraseña</label><br>
-        <input type="password" name="cpassword"><br><br>
+                                <!-- <h3 class="mb-5">Modas Marisol</h3> -->
+                                <div class="form-outline mb-4">
 
-        
-        <button type="submit">Registrate</button>
+                                <h5 class="mb-3">¡Registrate!</h5>
+                                <img src="images/logo.jpeg" class="u-logo-image u-logo-image-1" style="width:200px; height:75x">
+                                </div>
+                                
+                                <input type="hidden" name="registrarse">
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="username" class="form-control form-control-lg" />
+                                    <label class="form-label" for="typeEmailX-2">Usuario</label>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="email" class="form-control form-control-lg" />
+                                    <label class="form-label">Email</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="password" name="password" class="form-control form-control-lg" />
+                                    <label class="form-label">Contraseña</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="password" name="cpassword" class="form-control form-control-lg" />
+                                    <label class="form-label">Repita la contraseña</label>
+                                </div>
+                                <div class="form-outline mb-4">
+
+                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Registrarse</button>
+                                </div>
+                                <div class="form-outline mb-4">
+
+                                    <a class="btn btn-primary btn-lg btn-block" href="index.php">¿Ya tienes cuenta?</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </form>
 </body>
 
 </html>
-
-
-<!DOCTYPE html>
- <html lang="en">
-
- <head>
-     <meta charset="utf-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <title>Bootstrap demo</title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-     <script>
- 
-     </script>
- </head>
-
- <body>
-     <form action="" method="POST">
-         <section class="vh-100" style="background-color: #508bfc;">
-             <div class="container py-5 h-100">
-                 <div class="row d-flex justify-content-center align-items-center h-100">
-                     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                         <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                             <div class="card-body p-5 text-center">
-
-                                 <h3 class="mb-5">Registrate!</h3>
-
-                                 <div class="form-outline mb-4">
-                                     <input type="text" name="username" class="form-control form-control-lg" />
-                                     <label class="form-label" for="typeEmailX-2">Usuario</label>
-                                 </div>
-
-                                 <div class="form-outline mb-4">
-                                     <input type="password" name="password" class="form-control form-control-lg" />
-                                     <label class="form-label" for="typePasswordX-2">Contraseña</label>
-                                 </div>
-
-                                 <div class="form-outline mb-4">
-
-                                     <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-                                 </div>
-                                 <div class="form-outline mb-4">
-
-                                     <a class="btn btn-primary btn-lg btn-block" href="signup.php">Registrate</a>
-                                 </div>
-
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </section>
-     </form>
- </body>
-
- </html>
