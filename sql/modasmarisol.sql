@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-12-2022 a las 17:52:42
+-- Tiempo de generación: 05-12-2022 a las 11:16:52
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -94,11 +94,11 @@ INSERT INTO `prendas` (`id`, `nombre`, `precio`, `cantidadStock`, `url`) VALUES
 (2, 'pantalon', '19.99', 20, 'id2.png'),
 (3, 'Disfraz', '34.99', 100, 'id3.png'),
 (4, 'Dwayne Johnson', '15.00', 1000, 'id4.png'),
-(5, 'Sudadera con logo', '20.00', 1000, 'id5.jpeg'),
+(5, 'Sudadera Patriota', '20.00', 1000, 'id5.jpeg'),
 (6, 'Maillot Azul', '44.99', 100000, 'id6.jpeg'),
 (7, '\"I LOVE PHP\"', '9.99', 12222, 'id7.png'),
-(8, 'Camiseta PHP ENJOYER', '12.99', 1231321, 'id8.png')
-;
+(8, 'Camiseta PHP ENJOYER', '12.99', 1231321, 'id8.png'),
+(9, 'Roberto 👍', '99.99', 12, 'roberto.png');
 
 -- --------------------------------------------------------
 
