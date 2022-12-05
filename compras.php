@@ -6,6 +6,11 @@ if (!isset($_SESSION['username'])) {
     header('location: ./index.php');
     exit();
 }
+
+/**
+ * Cuando paypal nos confirme el pago 
+ * Creamos una compra
+ */
 if (isset($_GET['PayerID']) && !empty($_GET['PayerID'])) {
     $data = $_SESSION['data'];
     $nombre = $data['nombre'];
@@ -16,20 +21,28 @@ if (isset($_GET['PayerID']) && !empty($_GET['PayerID'])) {
     $date = date('Y-m-d');
     $id = $_SESSION['id'];
     $sqlCompra = "INSERT INTO compra (nombre,direccion,paypal,dni,fecha,precioTotal,idUsuario)VALUES('$nombre','$direccion','$paypal','$dni','$date','$total','$id')";
-
+    /**
+     * Creamos la compra con los datos del usuario
+     */
     try{
 
         $result = $conexion->query($sqlCompra);
     }catch(Exception $e){
         var_dump($e);
     }
+    /**
+     * Obtenemos la ultima compra creada
+     */
     $sqlOrder = "SELECT id from compra ORDER BY id DESC ";
     
     $idCompra = mysqli_fetch_assoc($conexion->query($sqlOrder))['id'];
     
 
     $carrito = (array) $_SESSION['carrito'];
-
+    /**
+     * Añadimos los datos a la tabla de itemcompra
+     * con la prenda y el id de la compra asociada
+     */
     for ($i = 0; $i < sizeof($carrito); $i++) {
         $prendaId = $carrito[$i]['id'];
         $cantidad = $carrito[$i]['cantidad'];
@@ -37,11 +50,15 @@ if (isset($_GET['PayerID']) && !empty($_GET['PayerID'])) {
         $sqlItem = "INSERT INTO itemcompra (idCompra,idPrenda,cantidad,subtotal)VALUES('$idCompra','$prendaId','$cantidad','$subtotal')";
         $conexion->query($sqlItem);
     }
-
+    /**
+     * Borramos el carrito y los datos intermedios
+     */
     $_SESSION['carrito']=[];
     unset($_SESSION['data']);
 }
-
+/**
+ * Query para mostrar todas las compras que hay
+ */
 $id = $_SESSION['id'];
 $sql = "SELECT * FROM compra WHERE idUsuario='$id'";
 

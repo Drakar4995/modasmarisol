@@ -1,37 +1,70 @@
  <?php
     session_start();
     require_once 'Database.php';
+    /**
+     * Si el usuario no esta logeado
+     */
     if (!isset($_SESSION['username'])) {
 
         if (isset($_POST['username']) && isset($_POST['password'])) { {
+                /**
+                 * Comprobamos que existan los datos para el login
+                 */
                 if ((!empty($_POST['username']) || !empty($_POST['password']))) {
+
+                    /**
+                     * Comprobamos que los datos no esten vacios
+                     */
                     $username = $_POST['username'];
                     $pass = $_POST['password'];
                     $pass = md5($pass);
-                    //"SELECT * FROM users WHERE user_name = '$uname' AND password='$pass' ";
-                    //SELECT * FROM `usuarios` WHERE username = "user" AND password = "81dc9bdb52d04dc20036dbd8313ed055";
+                
+                    /**
+                     * Lo buscamos en la bbdd y si coincide procedemos a logearlo
+                     */
                     $sql = "SELECT * from usuarios WHERE username = '$username' AND password = '$pass'";
 
                     $resultado = $conexion->query($sql);
 
                     if ($resultado->num_rows > 0) {
+                        /**
+                         * Creamos las sessiones necesarias para el usuario
+                         */
                         $user = mysqli_fetch_assoc($resultado);
                         $_SESSION['username'] = $user['username'];
                         $_SESSION['id'] = $user['id'];
                         $_SESSION['carrito'] = array();
-
+                        /**
+                         * Se redirige a las prendas
+                         */
+            
                         header("location: ./prendas.php");
                         exit();
                     } else {
+                        /**
+                         * Error en caso de que no exista el usuario 
+                         * o la contraseña no coincida
+                         */
                         $errorLogin = 'Este usuario no existe';
                     }
                 } else {
+                    /**
+                     * En caso de que no se rellenen todos los campos
+                     */
                     $errorLogin = "Rellena todos los campos";
                 }
             }
         } 
     }else {
+        /**
+         * En caso de que el usuario ya este logeado 
+         * lo regirimos a la pagina de prendas
+         */
         if (isset($_GET['logout'])) {
+            /**
+             * Para cuando exista la peticion de hacer un logout
+             * borramos las sessiones y lo redirigimos al index.
+             */
             session_start();
             unset($_SESSION["username"]);
             unset($_SESSION['carrito']);

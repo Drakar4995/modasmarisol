@@ -4,6 +4,10 @@ if (!isset($_SESSION['username'])) {
     header('location: ./index.php');
     exit();
 }
+/**
+ * Query para obtener todas las prendas
+ * 
+ */
 require_once 'Database.php';
 $sql = "SELECT * from prendas";
 $result = $conexion->query($sql);

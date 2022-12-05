@@ -1,19 +1,42 @@
 <?php
+/**
+ * En esta clase vamos a mostrar las prendas que esten en el carrito
+ * 
+ */
 session_start();
 require_once 'Database.php';
+
+/**
+ * Comprobamos que no este iniciada la session
+ * con el username, en caso afirmativo lo redirigimos al index
+ */
 if (!isset($_SESSION['username'])) {
     header('location: ./index.php');
     exit();
 }
+
+/**
+ * Si existe la solicitud para añadir un carrito
+ * se añade la prenda
+ */
 if (isset($_POST['addItem'])) {
 
     $idPrenda = $_POST['id'];
     $cantidad = $_POST['cantidad'];
     $sql = "SELECT * from prendas WHERE id='$idPrenda'";
 
+
+    /**
+     * Buscamos la prenda con el id que nos pasa y lanzamos la query
+     */
+
     $result = $conexion->query($sql);
 
     $row = mysqli_fetch_assoc($result);
+
+    /**
+     * Pasamos todos los datos a item en array para que sea mas comodo
+     */
     $item = [
         "id" => $row['id'],
         "nombre" => $row['nombre'],
@@ -22,9 +45,15 @@ if (isset($_POST['addItem'])) {
         "subtotal" => 0,
         "url" => $row['url']
     ];
+
     $esta = false;
     $subtotal = 0;
     $total = 0;
+    /**
+     * Tenemos que comprobar si la prenda a añadir esta en el carrito
+     * en caso de que si este simplemente sumamos la cantidad a la prenda
+     * y recalculamos el subtotal
+     */
     for ($i = 0; $i < sizeof($_SESSION['carrito']); $i++) {
         $tempCarrito = $_SESSION['carrito'][$i];
         if ($tempCarrito['id'] === $item["id"]) {
@@ -34,16 +63,31 @@ if (isset($_POST['addItem'])) {
         }
     }
 
+    /**
+     * En caso de que no se encuentre la prenda en el carrito simplemente lo añadimos
+     * 
+     */
     if (!$esta) {
         $item['subtotal'] = (float) $item['precio'] * $cantidad;
         array_push($_SESSION['carrito'], $item);
     }
 }
 
+/**
+ * Cuando recibimos una accion para eliminar
+ * una prenda del carrito 
+ * @param _GET['eliminar'] se le pasa el id de la prenda a eliminar con el formato
+ * carrito.php?eliminar=id
+ */
 if (isset($_GET['eliminar'])) {
 
     $id = $_GET['eliminar'];
 
+    /**
+     * Recorremos todo el carrito y buscamos el id
+     * en caso de que la cantidad sea > 1 se resta 1 a la cantidad a comprar
+     * si es 1 se borra de la lista
+     */
     for ($i = 0; $i < sizeof($_SESSION['carrito']); $i++) {
         $producto = $_SESSION['carrito'][$i];
         if ($producto['id'] == $id) {
@@ -57,7 +101,9 @@ if (isset($_GET['eliminar'])) {
         }
     }
 }
-
+/**
+ * Funcion que devuelve el total del carrito
+ */
 function getTotal()
 {
     $total = 0;
@@ -112,8 +158,11 @@ $items = [];
                                             <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i class="fas fa-angle-down mt-1"></i></a></p>
                                         </div> -->
                                         </div>
-
-                                        <?php $row = (array) $_SESSION['carrito'];
+                            
+                                        <?php /**
+                                         * Recorremos el carrito y mostramos los datos
+                                         */
+                                         $row = (array) $_SESSION['carrito'];
                                         if (sizeof($row) > 0) { ?>
                                             <?php for ($i = 0; $i < sizeof($row); $i++) : ?>
                                                 
