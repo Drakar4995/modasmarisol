@@ -1,6 +1,10 @@
 <?php
 session_start();
 if (isset($_POST)) {
+    /**
+     * Redireccion antes de poder mandar los datos a 
+     * paypal, ya que si no se pierden
+     */
     $data = ["total"=>$_POST['total'],"nombre"=>$_POST['nombreComprador'],"email" => $_POST['email'], "direccion" => $_POST['address1'], "dni" => $_POST['dni']];
     
     $_SESSION['data'] = $data;
@@ -16,6 +20,7 @@ if (isset($_POST)) {
 </head>
 
 <body onload="myFunction()">
+        <!-- Formulario que se envia a paypal -->
     <form id="enviar" action="https://www.sandbox.paypal.com/es/cgi-bin/webscr" method="POST">
 
         <input type="hidden" name="cmd" value="_xclick">

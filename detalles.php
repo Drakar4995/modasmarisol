@@ -2,8 +2,11 @@
 session_start();
 require_once 'Database.php';
 if (isset($_POST['detalles'])) {
+
     $id = $_POST['detalles'];
-    //SELECT nombre,precio,cantidad,url from prendas NATURAL JOIN itemcompra WHERE itemcompra.idPrenda = prendas.id AND itemcompra.idCompra=1;
+    /**
+     * Query para obtener todos los items de la compra 
+     */
     $sql = "SELECT nombre,precio,cantidad,url,subtotal from prendas NATURAL JOIN itemcompra WHERE itemcompra.idPrenda = prendas.id AND itemcompra.idCompra='$id'";
 
     $sqlCompra = "SELECT * from compra WHERE id='$id'";
@@ -12,9 +15,7 @@ if (isset($_POST['detalles'])) {
 
     $result = $conexion->query($sql);
 
-    // while ($row = mysqli_fetch_assoc($result)) {
-    //     //var_dump($row);
-    // };
+    
 } else {
     header("location: compras.php");
     exit();

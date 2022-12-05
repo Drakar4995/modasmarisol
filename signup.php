@@ -7,9 +7,13 @@ if (isset($_SESSION['username'])) {
 }
 
 if (isset($_POST['registrarse'])) {
-
+    /**
+     * Limpiamos los datos que vienen del post
+     */
     $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
-
+    /**
+     * Pasamos a data para que sea mas comodo 
+     */
     $data = [
         'username' => trim($_POST["username"]),
         'email' => trim($_POST["email"]),
@@ -47,15 +51,11 @@ if (isset($_POST['registrarse'])) {
             registrar($data["username"], $data["email"], $data["password"], $conexion);
             header("location: ./index.php");
         }
-    //Encriptamos la contraseña
-
-    /*if () {
     
-        header("location: ./login.php");
-    } else {
-        die("Ha ocurrido algun error");
-    }*/
 }
+/**
+ * Funcion para registrar 
+ */
 
 function registrar($username, $email, $password, $conexion)
 {
@@ -67,7 +67,9 @@ function registrar($username, $email, $password, $conexion)
         return true;
     }
 }
-
+/**
+ * Funcion para poder buscar el usuario por email
+ */
 function FindUserEmail($email, $conexion)
 {
 
@@ -81,6 +83,9 @@ function FindUserEmail($email, $conexion)
         return false;
     }
 }
+/**
+ * Funcion para buscar al usuario por username
+ */
 function FindUserUsername($username, $conexion)
 {
     $sql = "SELECT * from usuarios WHERE username='$username'";
